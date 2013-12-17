@@ -1,34 +1,37 @@
 <!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <title>After Effects tracking points parser</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>AEParser</title>
+	</head>
 
-    </head>
-    <body>
-        <form id="parse_form">
-        <textarea cols="80" rows="20" id="ae_content" name="ae_content"></textarea>
-        <p><input type="submit" value="Parse" id="submit_btn" /></p>
-        </form>
-        <textarea cols="80" rows="20" id="ae_result" name="ae_result"></textarea>
-        <script src="AEParser.js"></script>
+	<body>
+		<form id="parse_form">
+			<textarea cols="80" rows="20" id="ae_content" name="ae_content"></textarea>
+			<p><input type="submit" value="Parse" id="submit_btn" /></p>
+		</form>
+		<textarea cols="80" rows="20" id="ae_result" name="ae_result"></textarea>
 
-      <script>
-        var parserExample = function(){
-            var submitForm = function(e){
-                var aeJson = parser.parse(document.getElementById("ae_content").value);
-                document.getElementById("ae_result").value =JSON.stringify(aeJson,null,'\t');
-                return false;
-            };
-            return{
-                init:function(){
-                    form = document.getElementById("parse_form");
-                    form.onsubmit = submitForm;
-                }
-            };
-        }();
-        window.onload=parserExample.init;
-      </script>
-    </body>
+		<script src="AEParser.js"></script>
+		<script>
+			var parserExample = function()
+			{
+				var submitForm = function(e)
+				{
+					if(e) e.preventDefault();
+
+					var aeJson = AEParser.parse(document.getElementById("ae_content").value);
+					document.getElementById("ae_result").value = JSON.stringify(aeJson,null,'\t');
+				};
+				return {
+					init:function() 
+					{
+						form = document.getElementById("parse_form");
+						form.onsubmit = submitForm;
+					}
+				};
+			}();
+			window.onload = parserExample.init;
+		</script>
+	</body>
 </html>
